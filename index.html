@@ -1,0 +1,181 @@
+<html>
+  <head>
+    <title>Count</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  </head>
+  <body>
+    <div id="container" class="container">
+      <div class="row">
+        <div class="col s12">
+            <img src="logo.png" alt="">
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col card s6 center">
+          <img src="{{ url_for('video_feed') }}" class="responsive-img">
+        </div>
+        <div class="col card s6 center">
+            <h4 class="light">Count: <span>0</span></h4>
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+  <script>
+      window.onload = function(){
+        let $container = $('#container');
+        $container.hide();
+        $container.css('z-index', '100');
+        $container.css('position', 'absolute');
+        $container.css('text-align', 'center  ');
+        $container.css('width', 'cover');
+        $container.css('height', 'cover');
+        $container.css('top', '50%');
+        $container.css('left', '50%');
+        $container.css('transform', 'translate(-50%, -50%)');
+        $container.css('background-color', 'red');
+        $container.fadeIn(1500);
+        $container.fadeOut(1500);
+        setTimeout(function(){
+          $container.css('display', 'none');
+        }, 3000);
+
+        let $span = $('span');
+
+        let labs = [];
+        let dat = [];
+
+        setInterval(function(){
+          $.ajax({
+            url: '/fetch',
+            success: function(data){
+              $span.html(data);
+              dat.push(data);
+            }
+          });
+          $.ajax({
+            url: '/getDate',
+            success: function(data){
+              labs.push(data);
+            }
+          });
+          myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labs,
+                datasets: [{
+                    label: '# of people',
+                    data: dat,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ]
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0, // it is for ignoring negative step.
+                            beginAtZero:true,
+                            steps: 10,
+                            stepValue: 5,
+                            max: 30
+                        },
+                        gridLines: {
+                          display: false
+                        }
+                    }],
+                    xAxes: [{
+                      ticks: {
+                          display: false //this will remove only the label
+                      },
+                      gridLines: {
+                        display: false
+                      }
+                    }]
+                },
+                elements: {
+                  point:{
+                    radius: 0
+                  }
+                }
+            }
+        });
+        }, 3000);
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labs,
+                datasets: [{
+                    label: '# of people',
+                    data: dat,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ]
+                }]
+            },
+            options: {
+                scales: {
+                  yAxes: [{
+                      ticks: {
+                          min: 0, // it is for ignoring negative step.
+                          beginAtZero:true,
+                          steps: 10,
+                          stepValue: 5,
+                          max: 30
+                      },
+                      gridLines: {
+                        display: false
+                      }
+                  }],
+                  xAxes: [{
+                    ticks: {
+                        display: false //this will remove only the label
+                    },
+                    gridLines: {
+                      display: false
+                    }
+                  }]
+                }
+            }
+        });
+      };
+  </script>
+</html>

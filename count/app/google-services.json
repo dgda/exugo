@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "753911381798",
+    "firebase_url": "https://count-d7695.firebaseio.com",
+    "project_id": "count-d7695",
+    "storage_bucket": "count-d7695.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753911381798:android:ee1bb41e1d53c498",
+        "android_client_info": {
+          "package_name": "navas.cleofas.ablay.count"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753911381798-ds1bf5bem1f6qt6gav7acrjcgsemovrc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "navas.cleofas.ablay.count",
+            "certificate_hash": "fb63f4cce5ded4d17863672021a2a70b5f560359"
+          }
+        },
+        {
+          "client_id": "753911381798-qfca41okdfrv9v6jdm0tn9612jjt50hm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChiGw8SKsp7GiJIzATmLC5MmI5W0IUGFw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "753911381798-qfca41okdfrv9v6jdm0tn9612jjt50hm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
